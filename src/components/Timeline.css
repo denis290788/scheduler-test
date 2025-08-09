@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@layer base {
+    .timeline-scope {
+        --plan-bg: #3b82f6;
+        --plan-border: #2563eb;
+        --plan-text: #ffffff;
+
+        --fact-bg: #bfdbfe;
+        --fact-border: #93c5fd;
+        --fact-text: #000000;
+        --fact-pattern: linear-gradient(
+            45deg,
+            rgba(0, 0, 0, 0.1) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(0, 0, 0, 0.1) 50%,
+            rgba(0, 0, 0, 0.1) 75%,
+            transparent 75%,
+            transparent
+        );
+
+        --absence-bg: #ef4444;
+        --absence-border: #dc2626;
+        --absence-text: #ffffff;
+
+        --late-bg: #facc15;
+        --late-border: #ca8a04;
+        --late-text: #000000;
+
+        --early-bg: #f97316;
+        --early-border: #c2410c;
+        --early-text: #ffffff;
+    }
+}
+
+@layer components {
+    .vis-timeline {
+        @apply border rounded-md;
+    }
+
+    .vis-item.plan-shift {
+        background-color: var(--plan-bg);
+        border-color: var(--plan-border);
+        color: var(--plan-text);
+    }
+
+    .vis-item.fact-shift {
+        background-color: var(--fact-bg);
+        border-color: var(--fact-border);
+        color: var(--fact-text);
+        background-image: var(--fact-pattern);
+        background-size: 20px 20px;
+    }
+
+    .vis-item.absence-shift {
+        background-color: var(--absence-bg);
+        border-color: var(--absence-border);
+        color: var(--absence-text) !important;
+    }
+
+    .vis-item.late-shift {
+        background-color: var(--late-bg);
+        border-color: var(--late-border);
+        color: var(--late-text);
+    }
+
+    .vis-item.early-shift {
+        background-color: var(--early-bg);
+        border-color: var(--early-border);
+        color: var(--early-text);
+    }
+
+    @media (max-width: 640px) {
+        .vis-timeline {
+            @apply text-sm;
+        }
+        .vis-item .vis-item-content {
+            @apply text-xs;
+        }
+    }
+}
