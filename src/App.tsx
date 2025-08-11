@@ -2,10 +2,9 @@ import { useState } from "react";
 import DateRangePicker from "./components/DateRangePicker";
 import planData from "./data/plan.json";
 import factData from "./data/fact.json";
-import Timeline from "./components/Timeline";
 import type { FactShift, Shift } from "./types/types";
-import TimelineLegend from "./components/TimelineLegend";
-import "./components/Timeline.css";
+import "./components/Timeline/Timeline.styles.css";
+import Timeline, { TimelineLegend } from "./components/Timeline";
 
 export default function App() {
     const [range, setRange] = useState<{ start: Date; end: Date } | null>(null);

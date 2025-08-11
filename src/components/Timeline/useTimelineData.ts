@@ -1,5 +1,5 @@
 import { DataSet } from "vis-data";
-import type { FactShift, Shift } from "../types/types";
+import type { FactShift, Shift } from "../../types/types";
 import type { DataGroup, DataItem } from "vis-timeline";
 import { useMemo } from "react";
 
@@ -31,6 +31,7 @@ export function useTimelineData(
 
         const items: DataItem[] = [];
 
+        //Плановые смены
         plan.forEach((shift, i) => {
             const start = new Date(shift.planStart);
             const end = new Date(shift.planEnd);
@@ -48,6 +49,7 @@ export function useTimelineData(
             }
         });
 
+        //Фактические смены
         fact.forEach((shift, i) => {
             const start = new Date(shift.factStart);
             const end = new Date(shift.factEnd);
@@ -72,6 +74,66 @@ export function useTimelineData(
                     content: `${shift.role} (${shift.store})`,
                     title: `Плановая смена: ${getDuration(planStart, planEnd)}`,
                     className: "fact-shift",
+                    type: "range",
+                });
+            }
+        });
+
+        plan.forEach((shift, i) => {
+            const planStart = new Date(shift.planStart);
+            const planEnd = new Date(shift.planEnd);
+
+            if (planEnd > new Date()) return;
+            if (planStart < startDate || planEnd > endDate) return;
+
+            const factShift = fact.find(
+                (f) =>
+                    f.employee === shift.employee &&
+                    f.store === shift.store &&
+                    new Date(f.factStart).toISOString().slice(0, 10) ===
+                        planStart.toISOString().slice(0, 10)
+            );
+
+            //Прогулы
+            if (!factShift) {
+                items.push({
+                    id: `absence-${i}`,
+                    group: shift.employee,
+                    start: planStart,
+                    end: planEnd,
+                    content: `${shift.role} (${shift.store})`,
+                    title: `Плановая смена: ${getDuration(planStart, planEnd)}`,
+                    className: "absence-shift",
+                    type: "range",
+                });
+                return;
+            }
+
+            const factStart = new Date(factShift.factStart);
+            const factEnd = new Date(factShift.factEnd);
+
+            //Опоздания
+            if (factStart > planStart && factStart <= planEnd) {
+                items.push({
+                    id: `late-${i}`,
+                    group: shift.employee,
+                    start: planStart,
+                    end: factStart,
+                    content: `Опоздание (${shift.store})`,
+                    className: "late-shift",
+                    type: "range",
+                });
+            }
+
+            //Ранние уходы
+            if (factEnd < planEnd && factEnd >= planStart) {
+                items.push({
+                    id: `early-${i}`,
+                    group: shift.employee,
+                    start: factEnd,
+                    end: planEnd,
+                    content: `Ранний уход (${shift.store})`,
+                    className: "early-shift",
                     type: "range",
                 });
             }

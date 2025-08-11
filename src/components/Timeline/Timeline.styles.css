@@ -36,47 +36,56 @@
 
 @layer components {
     .vis-timeline {
-        @apply border rounded-md;
+        @apply border-0 rounded-md;
     }
 
     .vis-item.plan-shift {
-        background-color: var(--plan-bg);
-        border-color: var(--plan-border);
-        color: var(--plan-text);
+        background-color: var(--plan-bg) !important;
+        border-color: var(--plan-border) !important;
+        color: var(--plan-text) !important;
     }
 
     .vis-item.fact-shift {
-        background-color: var(--fact-bg);
-        border-color: var(--fact-border);
-        color: var(--fact-text);
-        background-image: var(--fact-pattern);
-        background-size: 20px 20px;
+        background-color: var(--fact-bg) !important;
+        border-color: var(--fact-border) !important;
+        color: var(--fact-text) !important;
+        background-image: var(--fact-pattern) !important;
+        background-size: 20px 20px !important;
     }
 
     .vis-item.absence-shift {
-        background-color: var(--absence-bg);
-        border-color: var(--absence-border);
+        background-color: var(--absence-bg) !important;
+        border-color: var(--absence-border) !important;
         color: var(--absence-text) !important;
     }
 
     .vis-item.late-shift {
-        background-color: var(--late-bg);
-        border-color: var(--late-border);
-        color: var(--late-text);
+        background-color: var(--late-bg) !important;
+        border-color: var(--late-border) !important;
+        color: var(--late-text) !important;
     }
 
     .vis-item.early-shift {
-        background-color: var(--early-bg);
-        border-color: var(--early-border);
-        color: var(--early-text);
+        background-color: var(--early-bg) !important;
+        border-color: var(--early-border) !important;
+        color: var(--early-text) !important;
     }
 
     @media (max-width: 640px) {
         .vis-timeline {
             @apply text-sm;
+            height: 300px !important;
+            overflow-x: auto;
         }
+
         .vis-item .vis-item-content {
             @apply text-xs;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .vis-timeline {
+            font-size: 10px;
         }
     }
 }

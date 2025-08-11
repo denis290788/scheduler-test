@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
-import type { FactShift, Shift } from "../types/types";
+import type { FactShift, Shift } from "../../types/types";
 import { Timeline as VisTimeline } from "vis-timeline/standalone";
-import { useTimelineData } from "../hooks/useTimelineData";
-import "./Timeline.css";
+import { useTimelineData } from "./useTimelineData";
+import "./Timeline.styles.css";
 
 interface TimelineProps {
     plan: Shift[];
@@ -31,8 +31,8 @@ export default function Timeline({ plan, fact, startDate, endDate }: TimelinePro
     }, [groups, items, startDate, endDate]);
 
     return (
-        <div className="timeline-scope w-full overflow-auto border rounded-md">
-            <div ref={timelineRef} className="timeline-scope" />
+        <div className="w-full overflow-auto rounded-md bg-gray-100 shadow-sm">
+            <div ref={timelineRef} />
         </div>
     );
 }

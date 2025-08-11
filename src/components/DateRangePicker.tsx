@@ -33,9 +33,9 @@ export default function DateRangePicker({ plan, onShowTimeline }: DateRangePicke
     };
 
     return (
-        <div className="flex flex-col sm:flex-row gap-4 mb-4 p-4">
+        <div className="mb-2 py-4 flex flex-col sm:flex-row gap-4 items-center">
             <div>
-                <label className="block text-sm font-medium text-gray-700">Начало</label>
+                <label className="mr-2 text-sm font-medium text-gray-700">Начало</label>
                 <DatePicker
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
@@ -44,12 +44,11 @@ export default function DateRangePicker({ plan, onShowTimeline }: DateRangePicke
                     endDate={endDate}
                     locale="ru"
                     dateFormat="dd.MM.yyyy"
-                    showIcon
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                    className="w-full h-8 px-2 rounded-md bg-gray-100 border-gray-300 shadow-sm sm:text-sm focus:outline-none"
                 />
             </div>
             <div>
-                <label className="block text-sm font-medium text-gray-700">Конец</label>
+                <label className="mr-4 text-sm font-medium text-gray-700 sm:mr-2">Конец</label>
                 <DatePicker
                     selected={endDate}
                     onChange={(date) => setEndDate(date)}
@@ -59,17 +58,16 @@ export default function DateRangePicker({ plan, onShowTimeline }: DateRangePicke
                     minDate={startDate ?? undefined}
                     locale="ru"
                     dateFormat="dd.MM.yyyy"
-                    showIcon
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                    className="h-8 px-2 rounded-md bg-gray-100 border-gray-300 shadow-sm sm:text-sm focus:outline-none"
                 />
             </div>
-            <div className="flex items-end">
+            <div className="w-65 sm:w-auto">
                 <button
                     onClick={handleClick}
                     disabled={!startDate}
-                    className={`px-4 py-2 rounded-md text-white font-medium transition-colors ${
-                        startDate ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-400"
-                    }`}
+                    className={`py-1 px-4 rounded-md text-white font-medium transition-colors ${
+                        startDate ? "bg-cyan-800 hover:bg-cyan-900" : "bg-gray-400"
+                    } w-full`}
                 >
                     Показать график
                 </button>
